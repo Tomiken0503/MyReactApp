@@ -12,7 +12,7 @@ export const TodoAdd = ({ buttonText, inputEl, handleAddTodoListItem }) => {
           variant="outlined"
           multiline
           rows={2}
-          fullWidth // 幅を広げるために追加
+          fullWidth
         />
       </Grid>
       <Grid item xs={12} style={{ textAlign: 'center' }}>

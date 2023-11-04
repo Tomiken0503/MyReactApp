@@ -6,33 +6,28 @@ import { TodoList } from "./TodoList";
 import { Container } from "@mui/material";
 
 function App() {
-  // useTodo()カスタムフックで作成した todoList を利用できるようにする
-  // todoListは現在のTODOの状態
+
   const {
     todoList,
-    addTodoListItem, // 新規TODOを追加する関数
-    toggleTodoListItemStatus, // done(完了/未完了)を反転させて更新する関数
-    deleteTodoListItem // TODOを削除する関数
+    addTodoListItem, // 新規TODOを追加
+    toggleTodoListItemStatus, // doneを反転・更新
+    deleteTodoListItem // TODOを削除
     } = useTodo();
 
-  // useRef で ref オブジェクトを作成(TODO入力フォームで利用)
+  // useRef で ref オブジェクトを作成
   const inputEl = useRef(null);
 
-  // TODO入力フォームで入力された文字列を新しいTODOに登録するための
-  // 関数を宣言
+  // 新しいTODOに登録する関数
   const handleAddTodoListItem = () => {
-    // 何も入力されていない場合にクリックしても何も返さない
+    // 何も入力されていない場合は処理をスキップ
     if(inputEl.current.value === "") return;
-
     // テキストエリアに入力されたテキストを新規TODOとして追加
-    // 追加したら、テキストエリアを空の文字列にする
-    // 新規TODOを追加する addTodoListItem関数を
-    // 「+ TODOを追加」ボタンをクリックで実行
     addTodoListItem(inputEl.current.value);
+    // 追加したら、テキストエリアを空の文字列にする
     inputEl.current.value = "";
   };
 
-  // console.logでコンソールに取得したTODOリストの情報を表示してみる
+  // コンソールに取得したTODOリストの情報を表示
   console.log("TODOリスト:",todoList);
 
   // filter() を利用して「TODOの状態が未完了」の要素を持つ新しい配列を作成
@@ -40,7 +35,7 @@ function App() {
     return !todo.done;
   });
 
-  // filter() を利用して「TODOが完了」の要素を持つ新しい配列を表示してみる
+  // filter() を利用して「TODOが完了」の要素を持つ新しい配列を表示
   const completedList = todoList.filter((todo) => {
     return todo.done;
   });
